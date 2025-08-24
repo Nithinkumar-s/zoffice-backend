@@ -13,9 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-// Register SampleService
-builder.Services.AddScoped<ISampleService, SampleService>();
+ 
 
 // Register EmployeeProvider and EmployeeService
 builder.Services.AddScoped<IEmployeeProvider, EmployeeProvider>();
@@ -23,7 +21,7 @@ builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 
 // SQL Server connection
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // JWT Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
